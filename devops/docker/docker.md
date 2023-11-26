@@ -18,6 +18,14 @@ docker run image-name:tag
 
 Start a new container from the specified image.
 
+### Run a container and bind to random port automatically:
+
+```
+docker run -d -P nginx
+```
+
+will randomly bind port 80 to any port and run in detached mode
+
 ### List running containers:
 
 ```
@@ -30,6 +38,22 @@ Shows all running containers.
 
 ```
 docker ps -a
+```
+
+Shows all containers, both running and stopped.
+
+or
+
+```
+docker container ls
+```
+
+Shows only running containers
+
+or
+
+```
+docker container ls --all
 ```
 
 Shows all containers, both running and stopped.
@@ -56,6 +80,12 @@ Removes a container.
 docker images
 ```
 
+or
+
+```
+docker image ls
+```
+
 Shows all images available locally.
 
 ### Remove an image:
@@ -65,6 +95,14 @@ docker rmi image-name:tag
 ```
 
 Removes a Docker image.
+
+### Search images:
+
+```
+docker search <keyword>
+```
+
+list all images matching the keyword with description and stars
 
 ### Pull an image:
 
@@ -182,6 +220,18 @@ View logs of a specific service.
 
 ## Housekeeping
 
+### Remove container:
+
+```
+docker rm <container_id>
+```
+
+### Remove Image:
+
+```
+docker rm <image_id>
+```
+
 ### Remove all stopped containers:
 
 ```
@@ -190,13 +240,21 @@ docker container prune
 
 Cleans up stopped containers.
 
-### Remove unused images:
+### Remove dangling images:
 
 ```
 docker image prune
 ```
 
-Cleans up unused images.
+A dangling image is one that has not been tagged. Remember that Docker images are identified by their sha256 digests, not their tags.
+
+### Remove all unused images:
+
+```
+docker image prune
+```
+
+Cleans up unused images. An unused image is one that is not currently assigned to any container.
 
 ### Remove unused networks:
 

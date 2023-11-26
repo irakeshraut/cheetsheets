@@ -1,0 +1,32 @@
+# Docker Componse emaple to run rails app with postgres. Any code changes in localhost will also change in Docker
+
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: devops_practice_development
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+
+  web:
+    image: devops_practice_web:latest
+    build: .  # This will use Dockerfile in the current directory
+    command: bash -c "rm -f tmp/pids/server.pid && ./bin/rails server -b '0.0.0.0'"
+    volumes:
+      - .:/rails
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db/devops_practice_development
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
