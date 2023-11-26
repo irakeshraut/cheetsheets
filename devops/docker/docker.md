@@ -208,12 +208,40 @@ Stops the services defined in docker-compose.yml.
 docker-compose build
 ```
 
+or
+
+```sh
+docker-compose up --build
+```
+
 Builds the images for the services defined in docker-compose.yml.
 
 ### View logs:
 
 ```
 docker-compose logs service-name
+```
+
+eg
+
+```sh
+docker compose logs web
+```
+
+show the log for service named web
+
+### Open shell using docker compose
+
+```sh
+docker compose exec web shell
+```
+
+Open the shell for service named web
+
+### Running Rails command
+
+```sh
+docker compose exec web bundle exec rails db:migrate
 ```
 
 View logs of a specific service.
